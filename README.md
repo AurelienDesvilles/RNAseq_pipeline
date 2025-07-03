@@ -19,7 +19,7 @@ This repository contains a series of Bash and R scripts designed for processing 
 ├── raw_data/                # Input FASTQ files
 └── outputs/                 # Generated count tables,  distribution and quality files
  
-⚙️ Requirements
+##  Requirements
 •	conda
 •	Conda environments:
 o	mirge: miRDeep2
@@ -45,9 +45,9 @@ Her ewe use Homo_sapiens.GRCh38.dna.primary_assembly.fa ( ref: https://ftp.ensem
 •	mature and hairpin miRNA sequences (ref: https://www.mirbase.org/download/ )
 •	Genome coordinates file .gff3  (ref: https://www.mirbase.org/download/ )
  
-🚀 Usage
+##  Usage
 Preliminary step: 
-1: configure reference genome index
+### 1: configure reference genome index
 $ sed '/^>/ s/ /_/g'  <reference_genome.fa>  > tmp && mv tmp <reference_genome.fa>
     bowtie-build <reference_genome.fa> hgBowtie
     mkdir hgBowtie
@@ -59,12 +59,12 @@ $ sed '/^>/ s/ /_/g'  <reference_genome.fa>  > tmp && mv tmp <reference_genome.f
 •	Move all index files in this directory
 
 
-2: convert genome coordinates .gff3 file to .gtf
+### 2: convert genome coordinates .gff3 file to .gtf
 If you don’t have a .gtf file, you can convert an other genome coordinate file with AGAT.
 $ agat_convert_sp_gff2gtf.pl  --gff  <input_genome_coordinates.gff3> -o  <output_genome_coordinates.gtf>
 
  
-1. QC and Trimming
+##  1. QC and Trimming
 $ bash 1-QC_trimming.sh <raw_data_directory>  <trimgalore>  <”config”>
 
 •	Performs FastQC on raw FASTQ files (in raw data directory)
@@ -77,7 +77,7 @@ o	2-Data_Trimming/
 
 
  
-2. Alignment
+##  2. Alignment
 $ bash 2-Alignment.sh <Data_Trimming_directory > <miRNA_files_index >  <config>
 •	Aligns *_trimmed.fq reads using HISAT2
 •	Moves SAM files to 3-Data_Alignment/
@@ -85,7 +85,7 @@ $ bash 2-Alignment.sh <Data_Trimming_directory > <miRNA_files_index >  <config>
 
 
  
-3. Count and Stats
+##  3. Count and Stats
 $ ./3-CountStats.sh <data_alignment_directory>  <genome_coordinates.gtf> <config>
 •	Runs:
 o	samtools idxstats
@@ -98,7 +98,7 @@ o	samtools flagstat
 └── C-Flagstats_Counts/
 
  
-4. miRDeep2 Analysis 
+##  4. miRDeep2 Analysis 
 $ ./4-miRDeep_analysis.sh  <data_trimming_directory> <config>
 •	Automatically finds *_trimmed.fq files
 •	Performs mapping with mapper.pl
@@ -116,7 +116,7 @@ Warning: This step may take several hours. Also, make sure you have enough memor
 
 
  
-5. miRge3.0 Analysis to find isomiRNA
+##  5. miRge3.0 Analysis to find isomiRNA
 $ ./5-miRge_analysis.sh <data_trimming_directory> <config>
 Finds *_trimmed.fq, renames to *_mirge.fastq
 •	Runs miRge3.0 analysis with:
@@ -129,7 +129,7 @@ Warning: Make sure you have enough memory space.
 
 
  
-6. Count Matrix Aggregation (miRDeep2 Results)
+##  6. Count Matrix Aggregation (miRDeep2 Results)
 $ Rscript 6-Count_miRDeep.r <dir> <split_index> <file_pattern>
 •	Aggregates all miRDeep2 .csv results into combined count matrices.
 •	Parameters:
@@ -142,7 +142,7 @@ o	All_miRDeep2_results_normalizedRPM_read_counts.csv: RPM-normalized counts
 
 
  
-7. Distribution and CQ Summary (Count Matrix)
+##  7. Distribution and CQ Summary (Count Matrix)
 $ Rscript 7-DistribQuality.r <count_matrix.tsv> <output_dir>
 •	Performs extensive quality control on miRNA count matrices (raw or RPM)
 •	Generates:
@@ -155,8 +155,7 @@ o	Barplots of 0-value proportions per sample and variable
 o	Binary heatmap of 0 vs. non-zero values (0Values_Heatmap.png)
 Input matrix must have sample columns starting from column 3.
 
- 
-✅ Output Overview
+##   Output Overview
 Each step generates specific subfolders:
 •	0-Data_raw/ : Original FASTQ files
 •	1-Data_QC/ : FastQC reports pre-trimming
@@ -166,8 +165,8 @@ Each step generates specific subfolders:
 •	miRDeep_Analysis/ : Per-sample miRDeep2 folders
 •	miRge/ : miRge3.0 output reports and files
 •	7-Quentiles_plots/:  QC files
- 
-📬 Contact
+
+### Contact
 For questions or suggestions, please contact Romain Piucco at romain.piucco@univ-lorraine.fr, Aurélien Desvilles at desvillesaurelien@gmail.com.
 
 
