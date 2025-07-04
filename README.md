@@ -1,8 +1,8 @@
 # RNAseq_pipeline
 
-#### Author: Romain Piucco
-#### Co-author: Aurélien Desvilles
-#### Supervisor: Sébastien Hergalant
+#### Authors: Romain Piucco
+####          Aurélien Desvilles
+####          Sébastien Hergalant
 
 ## Small RNAseq pipeline 
 This repository contains a series of Bash and R scripts designed for processing small RNA-seq data. The pipeline includes quality control (QC), trimming, alignment, read counting, analysis using miRDeep2 and miRge3.0, count and normalization.
@@ -167,6 +167,6 @@ Each step generates specific subfolders:
 •	7-Quentiles_plots/:  QC files
 
 ### Contact
-For questions or suggestions, please contact Romain Piucco at romain.piucco@univ-lorraine.fr, Aurélien Desvilles at desvillesaurelien@gmail.com.
+For questions or suggestions, please contact Romain Piucco at romain.piucco@univ-lorraine.fr, Aurélien Desvilles at desvillesaurelien@gmail.com, Sebastien Hergalant at sebastien.hergalant@univ-lorraine.fr. 
 
 
