@@ -1,4 +1,4 @@
-# RNAseq_pipeline
+# Small_RNAseq_pipeline
 
 #### Authors: Romain Piucco
 ####          Aurélien Desvilles
